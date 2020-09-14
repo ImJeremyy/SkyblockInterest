@@ -9,40 +9,34 @@ const client = require("redis").createClient(process.env.REDIS_URL);
 
 const loop = () => {
 	//code runs every minute
-	// client.get("hoursLeft", (err1, reply1) => {
-	// 	client.get("minutesLeft", (err2, reply2) => {
-	// 		if (err1 != null || err2 != null) {
-	// 			const hoursLeft = parseInt(reply1.toString());
-	// 			const minutesLeft = parseInt(reply2.toString());
-	// 			console.log(hoursLeft + ":" + minutesLeft);
-	// 			if (minutesLeft > 0) {
-	// 				//if there's minutes
-	// 				minutesLeft -= 1;
-	// 			} else if (minutesLeft == 0) {
-	// 				//no minutes
-	// 				if (hoursLeft > 0) {
-	// 					//there are hours
-	// 					minutesLeft = 59;
-	// 					hoursLeft -= 1;
-	// 				} else {
-	// 					//no hours
-	// 					messageInterestChannel();
-	// 					hoursLeft = process.env.interestCycleHours;
-	// 					minutesLeft = 0;
-	// 				}
-	// 			}
-	// 			// set("hoursLeft", hoursLeft);
-	// 			// set("minutesLeft", minutesLeft);
-	// 		} else {
-	// 			console.log("time not initialized");
-	// 		}
-	// 	});
-	// });
-
-	client.get("interestChannel", (err, reply) => {
-		if (err != null) {
-			console.log(reply.toString());
-		}
+	client.get("hoursLeft", (err1, reply1) => {
+		client.get("minutesLeft", (err2, reply2) => {
+			if (err1 != null || err2 != null) {
+				const hoursLeft = parseInt(reply1.toString());
+				const minutesLeft = parseInt(reply2.toString());
+				console.log(hoursLeft + ":" + minutesLeft);
+				if (minutesLeft > 0) {
+					//if there's minutes
+					minutesLeft -= 1;
+				} else if (minutesLeft == 0) {
+					//no minutes
+					if (hoursLeft > 0) {
+						//there are hours
+						minutesLeft = 59;
+						hoursLeft -= 1;
+					} else {
+						//no hours
+						messageInterestChannel();
+						hoursLeft = process.env.interestCycleHours;
+						minutesLeft = 0;
+					}
+				}
+				set("hoursLeft", hoursLeft);
+				set("minutesLeft", minutesLeft);
+			} else {
+				console.log("time not initialized");
+			}
+		});
 	});
 };
 
@@ -70,9 +64,13 @@ function messageInterestChannel() {
 		});
 }
 
-bot.on("ready", () => {
-	setInterval(loop, 1 * 1000);
+const timeout = setInterval(loop, 1 * 1000);
 
+function refreshTimeout() {
+	timeout.refresh();
+}
+
+bot.on("ready", () => {
 	console.log("Ready");
 });
 
@@ -96,3 +94,5 @@ bot.on("message", (message) => {
 
 console.log("Loading");
 bot.login(process.env.token);
+
+module.exports.refreshTimeout = refreshTimeout;
