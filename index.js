@@ -39,7 +39,7 @@ const loop = () => {
 	// 	});
 	// });
 
-	client.get("hoursLeft", (err, reply) => {
+	client.get("interestChannel", (err, reply) => {
 		if (err != null) {
 			console.log(reply.toString());
 		}
