@@ -39,12 +39,14 @@ const loop = () => {
 	// 	});
 	// });
 
-	var hoursLeft;
+	client.set("hoursLeft", "lemon");
 
+	var hoursLeft;
 	client.get("hoursLeft", (err, reply) => {
 		hoursLeft = reply.toString();
+		console.log("1: " + reply.toString());
 	});
-	console.log(hoursLeft);
+	console.log("2: " + hoursLeft);
 };
 
 function messageInterestChannel() {
