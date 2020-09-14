@@ -64,13 +64,15 @@ function messageInterestChannel() {
 		});
 }
 
-const timeout = setInterval(loop, 1 * 1000);
+var timeout;
 
 function refreshTimeout() {
 	timeout.refresh();
+	console.log("Timeout refreshed");
 }
 
 bot.on("ready", () => {
+	timeout = setInterval(loop, 1 * 1000);
 	console.log("Ready");
 });
 
