@@ -1,5 +1,6 @@
 const CommandBase = require("./command_base");
 const client = require("redis").createClient(process.env.REDIS_URL);
+const refreshTimeout = require("../index").refreshTimeout;
 
 class SetInterestCommand extends CommandBase {
 	constructor() {
@@ -46,6 +47,7 @@ class SetInterestCommand extends CommandBase {
 			} else {
 				channel.send(user.toString() + " Invalid amount of args.");
 			}
+			refreshTimeout();
 		} else {
 			channel.send(user.toString() + " You are not an admin!");
 		}
