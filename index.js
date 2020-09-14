@@ -12,27 +12,29 @@ const loop = () => {
 	// const readSettings = JSON.parse(fs.readFileSync(settings.path));
 	client.get("hoursLeft", (err1, reply1) => {
 		client.get("minutesLeft", (err2, reply2) => {
-			const hoursLeft = reply1.toString();
-			const minutesLeft = reply2.toString();
-			console.log(hoursLeft + ":" + minutesLeft);
-			if (minutesLeft > 0) {
-				//if there's minutes
-				minutesLeft -= 1;
-			} else if (minutesLeft == 0) {
-				//no minutes
-				if (hoursLeft > 0) {
-					//there are hours
-					minutesLeft = 59;
-					hoursLeft -= 1;
-				} else {
-					//no hours
-					messageInterestChannel();
-					hoursLeft = process.env.interestCycleHours;
-					minutesLeft = 0;
+			if (err1 != null || err2 != null) {
+				const hoursLeft = reply1.toString();
+				const minutesLeft = reply2.toString();
+				console.log(hoursLeft + ":" + minutesLeft);
+				if (minutesLeft > 0) {
+					//if there's minutes
+					minutesLeft -= 1;
+				} else if (minutesLeft == 0) {
+					//no minutes
+					if (hoursLeft > 0) {
+						//there are hours
+						minutesLeft = 59;
+						hoursLeft -= 1;
+					} else {
+						//no hours
+						messageInterestChannel();
+						hoursLeft = process.env.interestCycleHours;
+						minutesLeft = 0;
+					}
 				}
+				client.set("hoursLeft", hoursLeft);
+				client.set("minutesLeft", minutesLeft);
 			}
-			client.set("hoursLeft", hoursLeft);
-			client.set("minutesLeft", minutesLeft);
 		});
 	});
 };
