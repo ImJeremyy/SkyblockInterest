@@ -47,7 +47,6 @@ class SetInterestCommand extends CommandBase {
 			} else {
 				channel.send(user.toString() + " Invalid amount of args.");
 			}
-			index.refreshTimeout();
 		} else {
 			channel.send(user.toString() + " You are not an admin!");
 		}
