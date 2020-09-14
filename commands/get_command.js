@@ -12,7 +12,7 @@ class GetCommand extends CommandBase {
 		const user = message.author;
 
 		client.get(args[0], (err, reply) => {
-			if (err != null) {
+			if (err == null) {
 				channel.send(user.toString() + " Successful: " + reply.toString());
 			} else {
 				channel.send(user.toString() + " Error: " + err);
