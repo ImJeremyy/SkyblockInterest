@@ -9,12 +9,11 @@ const client = require("redis").createClient(process.env.REDIS_URL);
 
 const loop = () => {
 	//code runs every minute
-	// const readSettings = JSON.parse(fs.readFileSync(settings.path));
 	client.get("hoursLeft", (err1, reply1) => {
 		client.get("minutesLeft", (err2, reply2) => {
 			if (err1 != null || err2 != null) {
-				const hoursLeft = reply1.toString();
-				const minutesLeft = reply2.toString();
+				const hoursLeft = parseInt(reply1.toString());
+				const minutesLeft = parseIntreply2.toString());
 				console.log(hoursLeft + ":" + minutesLeft);
 				if (minutesLeft > 0) {
 					//if there's minutes
