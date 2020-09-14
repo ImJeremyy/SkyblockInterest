@@ -10,6 +10,7 @@ const client = require("redis").createClient(process.env.REDIS_URL);
 const loop = () => {
 	//code runs every minute
 	// const readSettings = JSON.parse(fs.readFileSync(settings.path));
+	console.log("loop start");
 	client.get("hoursLeft", (err1, reply1) => {
 		client.get("minutesLeft", (err2, reply2) => {
 			if (err1 != null || err2 != null) {
@@ -34,7 +35,17 @@ const loop = () => {
 				}
 				client.set("hoursLeft", hoursLeft);
 				client.set("minutesLeft", minutesLeft);
+			} else {
+				console.log(err1);
+				console.log(err2);
+				client.get("interestChannel", (err, reply) => {
+					console.log(reply.toString());
+				});
+				client.get("interestRole", (err, reply) => {
+					console.log(reply.toString());
+				});
 			}
+			console.log("loop end");
 		});
 	});
 };
