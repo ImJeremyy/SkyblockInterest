@@ -13,7 +13,7 @@ const loop = () => {
 		client.get("minutesLeft", (err2, reply2) => {
 			if (err1 != null || err2 != null) {
 				const hoursLeft = parseInt(reply1.toString());
-				const minutesLeft = parseIntreply2.toString());
+				const minutesLeft = parseInt(reply2.toString());
 				console.log(hoursLeft + ":" + minutesLeft);
 				if (minutesLeft > 0) {
 					//if there's minutes
