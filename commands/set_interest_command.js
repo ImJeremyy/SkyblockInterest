@@ -1,6 +1,4 @@
 const CommandBase = require("./command_base");
-const settings = require("../settings.json");
-const util = require("../util");
 const client = require("redis").createClient(process.env.REDIS_URL);
 
 class SetInterestCommand extends CommandBase {

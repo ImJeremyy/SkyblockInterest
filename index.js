@@ -3,8 +3,6 @@ const SetInterestCommand = require("./commands/set_interest_command");
 const IdCommand = require("./commands/id_command");
 const bot = new Discord.Client();
 
-const settings = require("./settings.json");
-
 const commands = [new IdCommand(), new SetInterestCommand()];
 
 const client = require("redis").createClient(process.env.REDIS_URL);
