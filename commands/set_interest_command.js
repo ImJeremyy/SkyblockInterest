@@ -16,7 +16,7 @@ class SetInterestCommand extends CommandBase {
 	run(message, args) {
 		const channel = message.channel;
 		const user = message.author;
-		if (process.env.admins.includes(user.id)) {
+		if (process.env.admin == user.id) {
 			if (args.length == 1) {
 				if (args[0].toLowerCase() == "channel") {
 					client.set("interestChannel", channel.id);

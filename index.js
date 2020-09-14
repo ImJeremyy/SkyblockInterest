@@ -40,22 +40,20 @@ const loop = () => {
 };
 
 function messageInterestChannel() {
-	settings.interestChannels.forEach((channelId) => {
-		bot.channels
-			.fetch(channelId)
-			.then((channel) => {
-				const embed = {
-					title: "Skyblock Interest",
-					description: "Is now! Go online and grab it now.",
-					color: 25578,
-					timestamp: new Date().toString(),
-				};
-				channel.send(process.env.interestRole, { embed });
-			})
-			.catch((reason) => {
-				console.log("Invalid channel id set!");
-			});
-	});
+	bot.channels
+		.fetch(process.env.interestChannel)
+		.then((channel) => {
+			const embed = {
+				title: "Skyblock Interest",
+				description: "Is now! Go online and grab it now.",
+				color: 25578,
+				timestamp: new Date().toString(),
+			};
+			channel.send(process.env.interestRole, { embed });
+		})
+		.catch((r) => {
+			console.log("Invalid channel id set!");
+		});
 }
 
 bot.on("ready", () => {
