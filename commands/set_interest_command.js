@@ -33,11 +33,11 @@ class SetInterestCommand extends CommandBase {
 						client.set("minutesLeft", minutes);
 
 						console.log("set!");
-						client.get("set hoursLeft", (err, reply) => {
-							console.log("hoursLeft: " + reply.toString());
+						client.get("hoursLeft", (err, reply) => {
+							console.log("set hoursLeft: " + reply.toString());
 						});
-						client.get("set inutesLeft", (err, reply) => {
-							console.log("minutesLeft: " + reply.toString());
+						client.get("minutesLeft", (err, reply) => {
+							console.log("set minutesLeft: " + reply.toString());
 						});
 						channel.send(user.toString() + " Set time left to next interest: " + time + " (Time will sync to 31 hrs after this period)");
 					} else {
