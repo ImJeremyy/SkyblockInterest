@@ -3,7 +3,7 @@ const client = require("redis").createClient(process.env.REDIS_URL);
 
 class SetCommand extends CommandBase {
 	constructor() {
-		super["set"];
+		super(["set"]);
 	}
 
 	run(message, args) {
