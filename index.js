@@ -46,7 +46,7 @@ function set(key, value) {
 	const code = () => {
 		client.set(key, value);
 	};
-	setTimeout(code, 60 * 1000);
+	setTimeout(code, 0.1 * 1000);
 }
 
 function messageInterestChannel() {
@@ -81,7 +81,7 @@ function messageInterestChannel() {
 }
 
 bot.on("ready", () => {
-	setInterval(loop, 1 * 1000);
+	setInterval(loop, 60 * 1000);
 	console.log("Ready");
 });
 
