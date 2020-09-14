@@ -31,6 +31,10 @@ class SetInterestCommand extends CommandBase {
 					if (!isNaN(hours) && !isNaN(minutes)) {
 						client.set("hoursLeft", hours);
 						client.set("minutesLeft", minutes);
+
+						client.get("hoursLeft", (err, reply) => {
+							console.log(reply.toString());
+						});
 						channel.send(user.toString() + " Set time left to next interest: " + time + " (Time will sync to 31 hrs after this period)");
 					} else {
 						channel.send(user.toString() + " " + args[1] + " is not a number!");
