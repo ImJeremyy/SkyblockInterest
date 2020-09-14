@@ -49,20 +49,34 @@ function set(key, value) {
 }
 
 function messageInterestChannel() {
-	bot.channels
-		.fetch(process.env.interestChannel)
-		.then((channel) => {
-			const embed = {
-				title: "Skyblock Interest",
-				description: "Is now! Go online and grab it now.",
-				color: 25578,
-				timestamp: new Date().toString(),
-			};
-			channel.send(process.env.interestRole, { embed });
-		})
-		.catch((r) => {
-			console.log("Invalid channel id set!");
-		});
+	client.get("interestChannel", (err1, reply1) => {
+		if (err1 == null) {
+			const interestChannel = reply1.toString();
+			client.get("interestRole", (err2, reply2) => {
+				if (err2 == null) {
+					const interestRole = reply2.toString();
+					bot.channels
+						.fetch(interestChannel)
+						.then((channel) => {
+							const embed = {
+								title: "Skyblock Interest",
+								description: "Is now! Go online and grab it now.",
+								color: 25578,
+								timestamp: new Date().toString(),
+							};
+							channel.send(interestRole, { embed });
+						})
+						.catch((r) => {
+							console.log("Invalid channel id set!");
+						});
+				} else {
+					console.log("No Interest Role set");
+				}
+			});
+		} else {
+			console.log("No Channel ID set");
+		}
+	});
 }
 
 var timeout;
