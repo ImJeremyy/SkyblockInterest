@@ -6,7 +6,8 @@ const SetCommand = require("./commands/set_command");
 const client = require("redis").createClient(process.env.REDIS_URL);
 const bot = new Discord.Client();
 
-const commands = [new IdCommand(), new SetInterestCommand(), new GetCommand(), new SetCommand()];
+const commands = [new IdCommand(), new SetInterestCommand() /*,
+new GetCommand(), new SetCommand()*/];
 
 const loop = () => {
 	//code runs every minute
@@ -45,7 +46,7 @@ function set(key, value) {
 	const code = () => {
 		client.set(key, value);
 	};
-	setTimeout(code, 0.1 * 1000);
+	setTimeout(code, 60 * 1000);
 }
 
 function messageInterestChannel() {
@@ -79,15 +80,8 @@ function messageInterestChannel() {
 	});
 }
 
-var timeout;
-
-function refreshTimeout() {
-	timeout.refresh();
-	console.log("Timeout refreshed");
-}
-
 bot.on("ready", () => {
-	timeout = setInterval(loop, 1 * 1000);
+	setInterval(loop, 1 * 1000);
 	console.log("Ready");
 });
 
@@ -108,8 +102,6 @@ bot.on("message", (message) => {
 		});
 	}
 });
-
-module.exports.refreshTimeout = refreshTimeout;
 
 console.log("Loading");
 bot.login(process.env.token);
