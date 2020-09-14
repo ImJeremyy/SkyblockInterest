@@ -94,7 +94,7 @@ bot.on("message", (message) => {
 	}
 });
 
+module.exports.refreshTimeout = refreshTimeout;
+
 console.log("Loading");
 bot.login(process.env.token);
-
-module.exports.refreshTimeout = refreshTimeout;
