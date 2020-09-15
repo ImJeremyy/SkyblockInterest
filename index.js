@@ -4,10 +4,11 @@ const IdCommand = require("./commands/id_command");
 const GetCommand = require("./commands/get_command");
 const SetCommand = require("./commands/set_command");
 const InterestCommand = require("./commands/interest_command");
+const RoleCommand = require("./commands/role_command");
 const client = require("redis").createClient(process.env.REDIS_URL);
 const bot = new Discord.Client();
 
-const commands = [new IdCommand(), new SetInterestCommand(), new InterestCommand() /*,
+const commands = [new IdCommand(), new SetInterestCommand(), new InterestCommand(), new RoleCommand() /*,
 new GetCommand(), new SetCommand()*/];
 
 const loop = () => {
