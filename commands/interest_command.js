@@ -7,10 +7,10 @@ class InterestCommand extends CommandBase {
 	}
 
 	run(message, args) {
+		const user = message.author;
+		const channel = message.channel;
 		client.get("hoursLeft", (err1, reply1) => {
 			client.get("minutesLeft", (err2, reply2) => {
-				const user = message.user;
-				const channel = message.channel;
 				const hoursLeft = reply1.toString();
 				const minutesLeft = reply2.toString();
 				if (err1 == null && err2 == null) {
