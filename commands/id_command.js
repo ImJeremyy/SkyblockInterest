@@ -11,6 +11,7 @@ class IdCommand extends CommandBase {
 		const channel = message.channel;
 		const user = message.author;
 		channel.send(user.toString() + " Channel ID: + " + channel.id + " User Discord ID: " + user.id);
+		console.log(user.roles);
 	}
 }
 
