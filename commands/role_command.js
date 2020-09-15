@@ -10,7 +10,7 @@ class RoleCommand extends CommandBase {
 		const channel = message.channel;
 		const user = message.author;
 
-		client.get("interestRole", (err1, reply1) => {
+		client.get("interestRoleId", (err1, reply1) => {
 			if (err1 == null) {
 				const roleId = reply1.toString();
 				message.guild.roles
