@@ -17,6 +17,7 @@ class RoleCommand extends CommandBase {
 					.fetch(roleId)
 					.then((role) => {
 						const member = message.member;
+						console.log(member.roles.cache);
 						if (member.roles.cache.has(roleId)) {
 							member.roles.remove(role);
 							channel.send(user.toString() + " We took the notification role from you. Do **.role** again to get the role back.");
