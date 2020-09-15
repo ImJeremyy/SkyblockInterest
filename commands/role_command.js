@@ -16,7 +16,7 @@ class RoleCommand extends CommandBase {
 				message.guild.roles
 					.fetch(roleId)
 					.then((role) => {
-						if (user.roles.contains(role)) {
+						if (user.roles.includes(role)) {
 							user.roles.remove(role);
 							channel.send(user.toString() + " We took the notification role from you. Do **.role** again to get the role back.");
 						} else {
