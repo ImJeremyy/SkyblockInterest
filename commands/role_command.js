@@ -13,7 +13,6 @@ class RoleCommand extends CommandBase {
 		client.get("interestRoleId", (err1, reply1) => {
 			if (err1 == null) {
 				const roleId = reply1.toString();
-				console.log(roleId);
 				message.guild.roles
 					.fetch(roleId)
 					.then((role) => {
@@ -26,6 +25,7 @@ class RoleCommand extends CommandBase {
 						}
 					})
 					.catch((err) => {
+						console.log(err);
 						channel.send(user.toString() + " Invalid role id! Tell an admin to do .setinterest role <@role>.");
 					});
 			} else {
