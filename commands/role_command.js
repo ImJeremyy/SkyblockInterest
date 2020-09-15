@@ -25,7 +25,7 @@ class RoleCommand extends CommandBase {
 						}
 					})
 					.catch((err) => {
-						channel.send(user.toString() + " Invalid role id! Tel an admin to do .setinterest role <@role>.");
+						channel.send(user.toString() + " Invalid role id! Tell an admin to do .setinterest role <@role>.");
 					});
 			} else {
 				channel.send(user.toString() + " No role was set.. Tell an admin to do .setinterest role <@role>");

@@ -41,6 +41,9 @@ class SetInterestCommand extends CommandBase {
 				} else if (args[0].toLowerCase() == "role") {
 					client.set("interestRole", args[1]);
 					channel.send(user.toString() + " Set the interest role to " + args[1]);
+				} else if (args[0].equalsIgnoreCase() == "roleid") {
+					client.set("interestRoleId", args[1]);
+					channel.send(user.toString() + " Set the interest role id to " + args[1]);
 				} else {
 					channel.send(user.toString() + " Unknown command");
 				}
